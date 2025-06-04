@@ -22,14 +22,6 @@ NidhiTrack is a blockchain-based subsidy tracker that aims to bring transparency
 4. Run a local blockchain node using `npx hardhat node`  
 5. Deploy contract with `npx hardhat run scripts/deploy.js --network localhost`
 
-## Project Structure
-
-NidhiTrack/
-├── contracts/          # Solidity smart contracts
-├── scripts/            # Deployment scripts
-├── hardhat.config.js   # Hardhat configuration
-├── package.json        # NPM dependencies
-└── README.md           # Project overview
 
 
 
