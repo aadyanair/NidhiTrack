@@ -25,11 +25,12 @@ NidhiTrack is a blockchain-based subsidy tracker that aims to bring transparency
 ## Project Structure
 
 NidhiTrack/
-├── contracts/ # Solidity smart contracts
-├── scripts/ # Deployment scripts
-├── hardhat.config.js # Hardhat configuration
-├── package.json # NPM dependencies
-└── README.md # Project overview
+├── contracts/          # Solidity smart contracts
+├── scripts/            # Deployment scripts
+├── hardhat.config.js   # Hardhat configuration
+├── package.json        # NPM dependencies
+└── README.md           # Project overview
+
 
 
 ## Author
