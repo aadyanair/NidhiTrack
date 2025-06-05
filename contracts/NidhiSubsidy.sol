@@ -4,7 +4,11 @@ pragma solidity ^0.8.9;
 contract NidhiSubsidy {
     address public government;  //will store ethereum address
 
+uint256 public subsidyCount = 0;
+
+
     struct Subsidy{   //custome data type
+        uint256 subsidyID;
         string recipientID;
         uint256 amount;
         uint256 date;
@@ -27,7 +31,10 @@ contract NidhiSubsidy {
     }
 
     function addSubsidy(string memory _recipientID, uint256 _amount, string memory _purpose) public onlyGov{
+        subsidyCount += 1; //increment ID
+
         subsidies.push(Subsidy({
+            subsidyID : subsidyCount,
             recipientID: _recipientID,
             amount: _amount,
             date: block.timestamp,
