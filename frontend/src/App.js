@@ -5,6 +5,8 @@ import { ethers } from "ethers";
 function App() {
   const [currentAccount, setCurrentAccount] = useState("");
   const [contract, setContract] = useState(null);
+  const [subsidies, setSubsidies] = useState([]);
+
 
   const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
@@ -138,14 +140,46 @@ useEffect(() => {
     }
   }
 
+  async function fetchAllSubsidies() {
+  if (!contract) return;
+
+  try {
+    const subsidyList = await contract.fetAllSubsidies();
+    setSubsidies(subsidyList);
+    console.log("Fetched subsidies:", subsidyList);
+  } catch (error) {
+    console.error("Error fetching subsidies:", error);
+  }
+}
+
+
   return (
   <div>
     <h1>NidhiTrack Frontend</h1>
     {currentAccount ? (
       <>
-        <p>Wallet Connected: {currentAccount}</p>
-        <button onClick={addNewSubsidy}>Add Subsidy</button>  {/* THIS BUTTON */}
-      </>
+  <p>Wallet Connected: {currentAccount}</p>
+  <button onClick={addNewSubsidy}>Add Subsidy</button>
+  <button onClick={fetchAllSubsidies}>View All Subsidies</button>
+
+  {subsidies.length > 0 && (
+    <div>
+      <h3>Subsidy Records</h3>
+      <ul>
+        {subsidies.map((s, index) => (
+          <li key={index}>
+            <strong>ID:</strong> {s.subsidyID.toString()} |{" "}
+            <strong>Recipient:</strong> {s.recipientID} |{" "}
+            <strong>Amount:</strong> {s.amount.toString()} |{" "}
+            <strong>Purpose:</strong> {s.purpose} |{" "}
+            <strong>Date:</strong> {new Date(Number(s.date) * 1000).toLocaleString()}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+</>
+
     ) : (
       <button onClick={connectWallet}>Connect Wallet</button>
     )}
