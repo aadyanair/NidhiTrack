@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 
+import { BrowserProvider, Contract } from "ethers";
+
 
 function App() {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -122,9 +124,9 @@ useEffect(() => {
 
   async function setupContract() {
     if (!window.ethereum) return;
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const contractInstance = new ethers.Contract(contractAddress, contractABI, signer);
+    const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
+    const signer = await provider.getSigner(0); // 0 = first hardhat account
+    const contractInstance = new Contract(contractAddress, contractABI, signer);
     setContract(contractInstance);
   }
 
@@ -144,7 +146,7 @@ useEffect(() => {
   if (!contract) return;
 
   try {
-    const subsidyList = await contract.fetAllSubsidies();
+    const subsidyList = await contract.getAllSubsidies();
     setSubsidies(subsidyList);
     console.log("Fetched subsidies:", subsidyList);
   } catch (error) {

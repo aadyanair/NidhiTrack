@@ -46,7 +46,7 @@ uint256 public subsidyCount = 0;
 //It creates a new subsidy and pushes it into the list
 
 
-    function fetAllSubsidies() public view returns (Subsidy[] memory){
+    function getAllSubsidies() public view returns (Subsidy[] memory){
         return subsidies;
     }
 //this above function returns the entire list of subsidies
